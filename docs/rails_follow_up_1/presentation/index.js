@@ -67,6 +67,14 @@ export default class Presentation extends React.Component {
           </Slide>
 
           <Slide transition={["slide"]} bgColor="primary">
+            <Heading size={1} fit caps lineHeight={1}>
+              <Link href="https://rails-followup-kobe.doorkeeper.jp/">
+                <Text bold caps textColor={textColor}>Rails Follow-up Kobe</Text>
+              </Link>
+            </Heading>
+          </Slide>
+
+          <Slide transition={["slide"]} bgColor="primary">
             <Heading fit>Enjoy CODE</Heading>
           </Slide>
 
