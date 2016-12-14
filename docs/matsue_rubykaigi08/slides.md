@@ -29,11 +29,11 @@
 
 **12月16日、17日、18日**
 
-## 🦀 :sake:
+## :beers: :sake:
 
 ---
 
-## Shinosaka.rbを作った理由、、
+## なぜShinosaka.rbを作ったか :question:
 
 ---
 
@@ -45,7 +45,8 @@
 * [西脇.rb & 神戸.rb 合同ペアプロ](https://shinosakarb.doorkeeper.jp/events/11944)
 * [Ruby舞鶴 & DDD.rb & Shinosaka.rb 合同合宿](https://shinosakarb.doorkeeper.jp/events/29388)
 * [Shinosaka.rb Advent Calendar 2016](http://qiita.com/advent-calendar/2016/shinosakarb)
-* Shinosaka.rb 合宿 @松江
+* [Shinosaka.rb @onLine](https://shinosakarb.doorkeeper.jp/events/54031)
+* Shinosaka.rb 合宿 @松江（いまここ）
 
 ---
 
@@ -58,16 +59,20 @@
 
 ---
 
-## [関西 Ruby コミュニティー](http://rubykansai.github.io/kansai-ruby-community/) :eyes:
+## [関西 Ruby コミュニティー](http://rubykansai.github.io/kansai-ruby-community/) :gem:
 
 ---
 
-## Rubyイベント2017 @関西
+## 関西イベント2017 :balloon:
 
 ### 関西Ruby会議2017
 2017年5月27日(土)
 
 ### Rails Girls Osaka
+2017年2月 予定
+
+### OSS Gate Osaka
+2017年2月 予定
 
 ---
 
@@ -76,7 +81,7 @@
 
 ---
 
-## エンジニアが幸せと思える環境を<br>魅力的な企業を関西で :gem:
+## エンジニアが幸せと思える環境を<br>魅力的なギルドを関西で :gem:
 
 ---
 
