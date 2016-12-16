@@ -33,6 +33,10 @@
 
 ---
 
+<img src='https://murajun1978.github.io/slides/images/shinosakarb_matsue_2016.JPG' width="80%" height="80%" />
+
+---
+
 ## なぜShinosaka.rbを作ったか :question:
 
 ---
@@ -68,10 +72,14 @@
 ### 関西Ruby会議2017
 2017年5月27日(土)
 
+### オープンソースカンファレンス2017 Osaka
+2017年1月28日(土)
+
 ### Rails Girls Osaka
-2017年2月 予定
 
 ### OSS Gate Osaka
+
+### CoderDojo 本町
 2017年2月 予定
 
 ---
