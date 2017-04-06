@@ -8,12 +8,12 @@
 
 ![@murajun1978](https://secure.gravatar.com/avatar/d8cd979e90361eb5ca5414dd15b35d0f)
 
-### Web Engineer
+### Web Developer
 ### Founder of Shinosaka.rb
 
 ---
 
-## Joined "6vox"
+## Joined "[6vox](http://6vox.com/)"
 
 ---
 
@@ -32,7 +32,14 @@
 * JSX
 * ES2015
 * ECO System
-* create-react-app
+* [create-react-app](https://github.com/facebookincubator/create-react-app)
+
+---
+
+## Component-Based
+
+* Loose coupling
+* Reusable
 
 ---
 
@@ -79,21 +86,25 @@
 ## Backend
 
 ### Awesome [Rails](http://rubyonrails.org/)  :heart_eyes:
+### Awesome [Json Web Token](https://jwt.io/)  :closed_lock_with_key:
 
 ---
 
 ## Rails
 
 * Generator
-* O/R Mapper
+* ORM
 * ECO System
 * Fast development
+* Api mode
 
 ---
 
-## RESTFul
+## REST
 
 * Simple
+* Stateless
+* Resource
 * Uniform Resource Identifier(URI)
 
 ---
@@ -108,12 +119,25 @@
 
 ## GraphQL on Rails
 
-* Powerful O/R Mapper + GraphQL
+* Powerful ORM + GraphQL
 * Sounds good :smirk:
 
 ---
 
-# Awesome facebook open source project
+## Json Web Token
+
+* Used Web Client and Mobile App
+* Used across different domains
+
+---
+
+## Try Next
+
+### Awesome [Relay](https://facebook.github.io/relay/)  :dancers:
+
+---
+
+# Awesome open source project
 
 ---
 
