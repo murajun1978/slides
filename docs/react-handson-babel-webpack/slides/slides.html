@@ -1,0 +1,384 @@
+<section>
+
+<h1>React hands-on</h1>
+<h2>Babel &amp;&amp; Webpack</h2>
+
+</section>
+<section>
+
+<h1>Goal</h1>
+
+<h2>Babel と Webpac を</h2>
+<h2>ゆる〜く理解する</h2>
+
+</section>
+<section>
+
+<h1>Babel</h1>
+
+<p><a href="http://babeljs.io/">http://babeljs.io/</a></p>
+
+</section>
+<section>
+
+<h1>ES2015(ES6)</h1>
+
+<p><a href="http://babeljs.io/learn-es2015/">http://babeljs.io/learn-es2015/</a></p>
+
+</section>
+<section>
+
+<h2>Arrow (=&gt;)</h2>
+
+<pre><code class="language-javascript">[1, 2, 3].map((n, i) =&gt; n + i )
+#=&gt; [1, 3, 5]
+
+const fnc = (props) =&gt; {
+  const { num } = props;
+}
+</code></pre>
+
+</section>
+<section>
+
+<h2>Class</h2>
+
+<pre><code class="language-javascript">class MyComponent extends Component {
+  constructor(props) {
+    super(props);
+    this._name = 'murajun1978';
+  }
+
+  render() {
+    return (
+      &lt;h1&gt;My name is {this._name}.&lt;/h1&gt;
+    );
+  }
+}
+</code></pre>
+
+</section>
+<section>
+
+<h2>ES2015を</h2>
+<h2>トランスパイルするための</h2>
+<h2>トランスパイラ</h2>
+
+</section>
+<section>
+
+<h1>Packages</h1>
+
+</section>
+<section>
+
+<h2>babel-core</h2>
+
+<h3>babelがtransformする為のcoreなplugin</h3>
+
+<p><a href="http://babeljs.io/docs/core-packages/#core">http://babeljs.io/docs/core-packages/#core</a></p>
+
+</section>
+<section>
+
+<h2>babel-polyfill</h2>
+
+<p><a href="http://babeljs.io/docs/usage/polyfill/">http://babeljs.io/docs/usage/polyfill/</a></p>
+
+<h3>古いブラウザが</h3>
+<h3>ES2015の標準オブジェクトに</h3>
+<h3>対応できるように拡張してくれる</h3>
+
+</section>
+<section>
+
+<h1>Plugins</h1>
+
+</section>
+<section>
+
+<h2>Presets</h2>
+
+<h3>ライブラリなどの独自のpluginセット</h3>
+<ul>
+  <li>env（これ便利だよ)</li>
+  <li>es2015</li>
+  <li>react</li>
+  <li>flow</li>
+</ul>
+
+</section>
+<section>
+
+<h2>Stage-X</h2>
+
+<h3>Stage-0 〜 Stage-4</h3>
+<h3>Stage-4ではれて正式採用</h3>
+
+</section>
+<section>
+
+<h2>babel-loader</h2>
+
+<h3>BabelをWebpack使うためのplugin</h3>
+
+<p><a href="https://github.com/babel/babel-loader">https://github.com/babel/babel-loader</a></p>
+
+</section>
+<section>
+
+<h1>.babelrc</h1>
+
+<p><a href="http://babeljs.io/docs/usage/babelrc/">http://babeljs.io/docs/usage/babelrc/</a></p>
+
+</section>
+<section>
+
+<h2>plugin/presetやoptionを追記</h2>
+<pre><code class="language-json">{
+  "presets": [
+    "es2015",
+    "react",
+    "stage-2"
+  ]
+}
+</code></pre>
+
+</section>
+<section>
+
+<h1>babel-register</h1>
+
+<p><a href="http://babeljs.io/docs/usage/babel-register/">http://babeljs.io/docs/usage/babel-register/</a></p>
+
+</section>
+<section>
+
+<h2>ES2015をトランスパイルできる</h2>
+<pre><code class="language-javascript">// base.js
+require("babel-register");
+require('./app');
+
+// app.js
+const fnc = (props) =&gt; {
+  ...
+}
+</code></pre>
+
+<h3>テストコードをES2015で書いて</h3>
+<h3>テストフレームワークがES2015に</h3>
+<h3>対応してないときに使ったり</h3>
+
+</section>
+<section>
+
+<h1>Webpack</h1>
+
+<p><a href="https://webpack.js.org/">https://webpack.js.org/</a></p>
+
+</section>
+<section>
+
+<h2>assetを生成するビルドツール</h2>
+<h3>Sprocketsみたいやつ</h3>
+<h3>JavaScript, TypeScript, CSS, Image file</h3>
+
+</section>
+<section>
+
+<h2>webpack.config.js</h2>
+<h3>webpackの設定ファイル</h3>
+
+</section>
+<section>
+
+<h2>Entry Points</h2>
+<p><a href="https://webpack.js.org/concepts/entry-points/">https://webpack.js.org/concepts/entry-points/</a></p>
+
+<pre><code class="language-javascript">// webpack.config.js
+const config = {
+  entry: {
+    home: './app/home/index.js',
+    order: './app/order/index.js',
+    vendor: [
+      'react',
+      'react-dom',
+    ],
+    plugins: [
+      new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js'),
+    ]
+  }
+};
+module.exports = config;
+</code></pre>
+
+</section>
+<section>
+
+<h2>Output</h2>
+<p><a href="https://webpack.js.org/concepts/output/">https://webpack.js.org/concepts/output/</a></p>
+
+<pre><code class="language-javascript">// webpack.config.js
+const { resolve } = require('path');
+const config = {
+  ...,
+  output: {
+    filename: 'bundle-[name].js',
+    path: resolve(__dirname, 'dist'),
+  }
+};
+module.exports = config;
+</code></pre>
+
+<h4>
+<code>[hash]</code> , <code>[chunkhash]</code> などのオプションもある</h4>
+
+</section>
+<section>
+
+<h2>Loaders</h2>
+<p><a href="https://webpack.js.org/concepts/loaders/">https://webpack.js.org/concepts/loaders/</a></p>
+
+<h3>CSSやTypeScripなどのModuleをrequire！</h3>
+<h3>CSS Modules</h3>
+
+<pre><code class="language-javascript">// webpack.config.js
+const config = {
+  ...,
+  module: {
+    rules: [
+      {test: /\.css$/, use: 'css-loader'},
+      {test: /\.ts$/, use: 'ts-loader'}
+    ]
+  }
+};
+module.exports = config;
+</code></pre>
+
+</section>
+<section>
+
+<h2>Plugins</h2>
+<p><a href="https://webpack.js.org/concepts/plugins/">https://webpack.js.org/concepts/plugins/</a></p>
+
+<pre><code class="language-javascript">// webpack.config.js
+const { resolve } = require('path');
+const config = {
+  ...,
+  output: {
+    filename: 'bundle-[name].js',
+    path: resolve(__dirname, 'dist'),
+    publicPath: '/',
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NamedModulesPlugin(),
+  ],
+};
+module.exports = config;
+</code></pre>
+
+</section>
+<section>
+
+<h2>Targets</h2>
+<p><a href="https://webpack.js.org/concepts/targets/">https://webpack.js.org/concepts/targets/</a></p>
+
+<h3>Node.js(Server side)用にビルド</h3>
+
+<pre><code class="language-javascript">// webpack.config.js
+const config = {
+  ...,
+  target: 'node',
+};
+module.exports = config;
+</code></pre>
+
+<h3>target list</h3>
+<p><a href="https://webpack.js.org/configuration/target/">https://webpack.js.org/configuration/target/</a></p>
+
+</section>
+<section>
+
+<h2>Hot Module Replacement</h2>
+<p><a href="https://webpack.js.org/concepts/hot-module-replacement/">https://webpack.js.org/concepts/hot-module-replacement/</a></p>
+
+<h3>ページリロードなしで</h3>
+<h3>Moduleの更新、追加、削除が可能</h3>
+
+<pre><code class="language-javascript">// .babelrc
+{
+  "presets": [
+    ["es2015", {"modules": false}],
+    "react"
+  ],
+  "plugins": [
+    "react-hot-loader/babel"
+  ]
+}
+
+// webpack.config.js
+const { resolve } = require('path');
+const config = {
+  ...,
+  output: {
+    filename: 'bundle-[name].js',
+    path: resolve(__dirname, 'dist'),
+    publicPath: '/',
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NamedModulesPlugin(),
+  ],
+  devServer: {
+    hot: true,
+    contentBase: resolve(__dirname, 'dist'),
+    publicPath: '/'
+  },
+};
+module.exports = config;
+</code></pre>
+
+</section>
+<section>
+
+<h2>inline-source-map</h2>
+
+<h3>ビルド前のコードをブラウザで確認できる</h3>
+<pre><code class="language-javascript">const config = {
+  ...,
+  devtool: 'inline-source-map',
+};
+module.exports = config;
+</code></pre>
+
+</section>
+<section>
+
+<h2>PostCSS</h2>
+<p><a href="http://postcss.org/">http://postcss.org/</a></p>
+
+<h3>JavaScriptで書いたプラグインで</h3>
+<h3>CSSをトランスパイル</h3>
+
+<h3>Plugins</h3>
+<p><a href="https://github.com/postcss/postcss/blob/master/docs/plugins.md">https://github.com/postcss/postcss/blob/master/docs/plugins.md</a></p>
+
+</section>
+<section>
+
+<h2>まとめ</h2>
+
+<ul>
+  <li>ザックリとは把握してて欲しい</li>
+  <li>けど、あまり詳しくなる必要はない</li>
+  <li>ハマったり時間もったいないから <a href="https://github.com/facebookincubator/create-react-app">create-react-app</a> とかで</li>
+</ul>
+
+</section>
+<section>
+
+<h2>Thank you <img class="emoji" alt=":smile:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f604.png">
+</h2>
+
+</section>
