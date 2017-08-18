@@ -12,7 +12,7 @@
 </section>
 <section>
 
-<h2>Helpful issue</h2>
+<h2>参考 issue</h2>
 
 <p><a href="https://github.com/facebook/react/issues/10294">React 16 beta #10294</a></p>
 
@@ -32,8 +32,8 @@
 <section>
 
 <h2>Environment Requirements</h2>
-<h4>depends on the collection types <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map">Map</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set">Set</a>
-</h4>
+<h4>
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map">Map</a> と <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set">Set</a> に依存するようになった</h4>
 
 </section>
 <section>
@@ -78,7 +78,7 @@ ReactDOM.render(
 <section>
 
 <h2>React Fiber</h2>
-<h4>Architecture of Reconciliation</h4>
+<h4>Reconciliationのアーキテクチャ</h4>
 <h3>Movie</h3>
 <p><a href="https://www.youtube.com/watch?v=ZCuYPiUIONs">Lin Clark - A Cartoon Intro to Fiber - React Conf 2017</a></p>
 
@@ -86,7 +86,7 @@ ReactDOM.render(
 <section>
 
 <h2>Reconciliation</h2>
-<h4>The algorithm React uses to diff one tree with another</h4>
+<h4>仮想DOMの差分を更新するアルゴリズム</h4>
 
 </section>
 <section>
@@ -99,7 +99,8 @@ ReactDOM.render(
 
 <h2>Stack</h2>
 <ul>
-  <li>Compare recursively Virtual DOM</li>
+  <li>仮想DOMを再帰的に比較する</li>
+  <li>同期レンダリング</li>
 </ul>
 
 </section>
@@ -107,11 +108,10 @@ ReactDOM.render(
 
 <h2>Problem</h2>
 <ul>
-  <li>It’s slow when the Virtual DOM tree structure deeper</li>
-  <li>Synchronous rendering</li>
-  <li>UI is locked if processing is slow
+  <li>仮想DOMのツリー構造が深いと遅くなってしまう</li>
+  <li>同期レンダリングなので、処理が遅くなるとUIがロックする
     <ul>
-      <li>Causing frames to drop and degrading the user experience</li>
+      <li>フレームをドロップしてユーザーエクスペリエンスを低下させる</li>
     </ul>
   </li>
 </ul>
@@ -121,10 +121,10 @@ ReactDOM.render(
 
 <h2>Fiber</h2>
 <ul>
-  <li>Fiber is the Javascript object</li>
-  <li>Abstract React Element update processing with Fiber</li>
-  <li>Make Fiber a linked list</li>
-  <li>Build a relationship between parents and siblings with other Fiber</li>
+  <li>FiberはJavascriptオブジェクト</li>
+  <li>React Elementの更新処理をFiberで抽象化</li>
+  <li>Fiberの連結リストを作成し、Fiberごとに更新処理を実行する</li>
+  <li>他のFiberと親子、兄弟の関連を構築する</li>
 </ul>
 
 </section>
@@ -228,48 +228,49 @@ ReactDOM.render(
 </section>
 <section>
 
-<h2>Resolves</h2>
+<h2>できること</h2>
 <ul>
-  <li>Pause work and come back later</li>
-  <li>Reuse previously completed work</li>
-  <li>Can give priority</li>
-  <li>Asynchronous rendering!</li>
+  <li>Fiberが独立しているので、処理を中断、再開することができる</li>
+  <li>以前に完了したFiberを再利用する</li>
+  <li>更新処理に優先順位をつけることができる</li>
+  <li>非同期レンダリング</li>
 </ul>
 
 </section>
 <section>
 
-<h2>Solutions</h2>
+<h2>内部的な実装</h2>
 <ul>
-  <li>Use <a href="https://developer.mozilla.org/ja/docs/Web/API/Window/requestIdleCallback">requestIdleCallback()</a> and <a href="https://developer.mozilla.org/ja/docs/Web/API/Window/requestAnimationFrame">requestAnimationFrame()</a>
-</li>
-  <li>High Priority - requestAnimationFrame()</li>
-  <li>Low Priority - requestIdleCallback()</li>
+  <li>
+<a href="https://developer.mozilla.org/ja/docs/Web/API/Window/requestIdleCallback">requestIdleCallback()</a> と <a href="https://developer.mozilla.org/ja/docs/Web/API/Window/requestAnimationFrame">requestAnimationFrame()</a> を使って、独自のスタックフレームワークを実装している</li>
+  <li>優先度の高い処理 - requestAnimationFrame()</li>
+  <li>優先度の低い処理 - requestIdleCallback()</li>
 </ul>
 
 </section>
 <section>
 
-<h2>Warning</h2>
+<h2>ご注意</h2>
 <ul>
-  <li>Asynchronous rendering is not enabled in v16.0
+  <li>非同期レンダリングはv16.0では、まだ使えない
     <ul>
-      <li>Async mode later during React 16.x</li>
+      <li>v16.xのどこかではいる</li>
     </ul>
   </li>
-  <li>ComponentWillUpdate is called many times</li>
-  <li>ComponentDidUpdate is called only once
+  <li>ComponentWillUpdateは複数回callされる可能性がある
     <ul>
-      <li>Don’t describe slow processing</li>
-      <li>It’s better to use Promise</li>
+      <li>更新処理が再開するときにもcallされる</li>
     </ul>
   </li>
+  <li>ComponentDidUpdateは1度だけcallされる</li>
+  <li>LifeCycleメソッドでは、遅い処理をcallするのは避ける</li>
+  <li>Promiseなどで非同期処理にするのがいいかも</li>
 </ul>
 
 </section>
 <section>
 
-<h2>Let’s try Asynchronous rendering</h2>
+<h2>非同期レンダリングを試そう!</h2>
 
 </section>
 <section>
@@ -279,25 +280,25 @@ ReactDOM.render(
 </section>
 <section>
 
-<h2>Problem</h2>
+<h2>問題点</h2>
 <ul>
-  <li>A Script error in Component could not be handling</li>
-  <li>The operation can continue if an exception occurs</li>
+  <li>Componentで発生した例外を補足できない</li>
+  <li>Component内で例外が発生しても操作できてしまう</li>
 </ul>
 
 </section>
 <section>
 
-<h2>Resolves</h2>
+<h2>できること</h2>
 <ul>
-  <li>Don’t render when an exception occurs</li>
-  <li>Handling exceptions with componentDidCatch</li>
+  <li>Error HandlingしていないComponentで例外が発生すると、何もレンダリングしない</li>
+  <li>componentDidCatchで、Component内の例外を補足できる</li>
 </ul>
 
 </section>
 <section>
 
-<h2>Let’s try Error Handling</h2>
+<h2>Error Handlingを試そう!</h2>
 
 </section>
 <section>
@@ -319,8 +320,8 @@ ReactDOM.render(
     <ul>
       <li>
 <code>prop-types</code> package</li>
-      <li>Let’s try <a href="https://flow.org/">flow</a>
-</li>
+      <li>
+<a href="https://flow.org/">flow</a> を使おう</li>
     </ul>
   </li>
   <li>Deprecated Addons
@@ -341,14 +342,14 @@ ReactDOM.render(
 
 <h2>Awesome React <img class="emoji" alt=":smile:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f604.png">
 </h2>
-<h4>Asynchronous rendering</h4>
-<h4>Component, Renderer and Reconciliation are split up in project</h4>
-<h4>WebAssembly come in the future?</h4>
+<h4>非同期レンダリング</h4>
+<h4>Component, RendererとReconciliationが分離されている</h4>
+<h4>ReactにWebAssemblyとかくるかも</h4>
 
 </section>
 <section>
 
-<h2>Thanks <img class="emoji" alt=":beers:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f37b.png">
+<h2>Enjoy React <img class="emoji" alt=":beers:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f37b.png">
 </h2>
 
 </section>

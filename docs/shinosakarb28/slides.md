@@ -7,7 +7,7 @@
 
 ---
 
-## Helpful issue
+## 参考 issue
 
 [React 16 beta #10294](https://github.com/facebook/react/issues/10294)
 
@@ -23,7 +23,7 @@
 ---
 
 ## Environment Requirements
-#### depends on the collection types [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) and [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set)
+#### [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) と [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) に依存するようになった
 
 ---
 
@@ -65,14 +65,14 @@ ReactDOM.render(
 ---
 
 ## React Fiber
-#### Architecture of Reconciliation
+#### Reconciliationのアーキテクチャ
 ### Movie
 [Lin Clark - A Cartoon Intro to Fiber - React Conf 2017](https://www.youtube.com/watch?v=ZCuYPiUIONs)
 
 ---
 
 ## Reconciliation
-#### The algorithm React uses to diff one tree with another
+#### 仮想DOMの差分を更新するアルゴリズム
 
 ---
 
@@ -82,22 +82,23 @@ ReactDOM.render(
 ---
 
 ## Stack
-- Compare recursively Virtual DOM
+- 仮想DOMを再帰的に比較する
+- 同期レンダリング
 
 ---
 
 ## Problem
-- It's slow when the Virtual DOM tree structure deeper
-- Synchronous rendering
-- UI is locked if processing is slow
-  - Causing frames to drop and degrading the user experience
+- 仮想DOMのツリー構造が深いと遅くなってしまう
+- 同期レンダリングなので、処理が遅くなるとUIがロックする
+  - フレームをドロップしてユーザーエクスペリエンスを低下させる
+
 ---
 
 ## Fiber
-- Fiber is the Javascript object
-- Abstract React Element update processing with Fiber
-- Make Fiber a linked list
-- Build a relationship between parents and siblings with other Fiber
+- FiberはJavascriptオブジェクト
+- React Elementの更新処理をFiberで抽象化
+- Fiberの連結リストを作成し、Fiberごとに更新処理を実行する
+- 他のFiberと親子、兄弟の関連を構築する
 
 ---
 
@@ -199,32 +200,33 @@ export type Fiber = {|
 
 ---
 
-## Resolves
-- Pause work and come back later
-- Reuse previously completed work
-- Can give priority
-- Asynchronous rendering!
+## できること
+- Fiberが独立しているので、処理を中断、再開することができる
+- 以前に完了したFiberを再利用する
+- 更新処理に優先順位をつけることができる
+- 非同期レンダリング
 
 ---
 
-## Solutions
-- Use [requestIdleCallback()](https://developer.mozilla.org/ja/docs/Web/API/Window/requestIdleCallback) and [requestAnimationFrame()](https://developer.mozilla.org/ja/docs/Web/API/Window/requestAnimationFrame)
-- High Priority - requestAnimationFrame()
-- Low Priority - requestIdleCallback()
+## 内部的な実装
+- [requestIdleCallback()](https://developer.mozilla.org/ja/docs/Web/API/Window/requestIdleCallback) と [requestAnimationFrame()](https://developer.mozilla.org/ja/docs/Web/API/Window/requestAnimationFrame) を使って、独自のスタックフレームワークを実装している
+- 優先度の高い処理 - requestAnimationFrame()
+- 優先度の低い処理 - requestIdleCallback()
 
 ---
 
-## Warning
-- Asynchronous rendering is not enabled in v16.0
-  - Async mode later during React 16.x
-- ComponentWillUpdate is called many times
-- ComponentDidUpdate is called only once
-  - Don't describe slow processing
-  - It's better to use Promise
+## ご注意
+- 非同期レンダリングはv16.0では、まだ使えない
+  - v16.xのどこかではいる
+- ComponentWillUpdateは複数回callされる可能性がある
+  - 更新処理が再開するときにもcallされる
+- ComponentDidUpdateは1度だけcallされる
+- LifeCycleメソッドでは、遅い処理をcallするのは避ける
+- Promiseなどで非同期処理にするのがいいかも
 
 ---
 
-## Let's try Asynchronous rendering
+## 非同期レンダリングを試そう!
 
 ---
 
@@ -232,19 +234,19 @@ export type Fiber = {|
 
 ---
 
-## Problem
-- A Script error in Component could not be handling
-- The operation can continue if an exception occurs
+## 問題点
+- Componentで発生した例外を補足できない
+- Component内で例外が発生しても操作できてしまう
 
 ---
 
-## Resolves
-- Don't render when an exception occurs
-- Handling exceptions with componentDidCatch
+## できること
+- Error HandlingしていないComponentで例外が発生すると、何もレンダリングしない
+- componentDidCatchで、Component内の例外を補足できる
 
 ---
 
-## Let's try Error Handling
+## Error Handlingを試そう!
 
 ---
 
@@ -257,7 +259,7 @@ export type Fiber = {|
   - `create-react-class` package
 - Deprecated React.PropTypes
   - `prop-types` package
-  - Let's try [flow](https://flow.org/)
+  - [flow](https://flow.org/) を使おう
 - Deprecated Addons
   - react-addons-create-fragment
   - react-addons-css-transition-group -> react-transition-group
@@ -270,10 +272,10 @@ export type Fiber = {|
 ---
 
 ## Awesome React :smile:
-#### Asynchronous rendering
-#### Component, Renderer and Reconciliation are split up in project
-#### WebAssembly come in the future?
+#### 非同期レンダリング
+#### Component, RendererとReconciliationが分離されている
+#### ReactにWebAssemblyとかくるかも
 
 ---
 
-## Thanks :beers:
+## Enjoy React :beers:
