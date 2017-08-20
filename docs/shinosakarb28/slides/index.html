@@ -121,6 +121,22 @@ ReactDOM.render(
 </section>
 <section>
 
+<h2>Environment Requirements</h2>
+<ul>
+  <li>
+<a href="https://developer.mozilla.org/ja/docs/Web/API/Window/requestIdleCallback">requestIdleCallback</a> に依存
+    <ul>
+      <li>
+<a href="https://caniuse.com/#search=requestIdleCallback">対応ブラウザ</a>が少ないので、<a href="https://github.com/facebook/react/blob/master/src/renderers/shared/ReactDOMFrameScheduling.js#L57-L83">polyfill</a>を実装している</li>
+    </ul>
+  </li>
+  <li>
+<a href="https://developer.mozilla.org/ja/docs/Web/API/Window/requestAnimationFrame">requestAnimationFrame</a> に依存</li>
+</ul>
+
+</section>
+<section>
+
 <h2>React Fiber</h2>
 <h4>Reconciliationのアーキテクチャ</h4>
 <h3>Movie</h3>
