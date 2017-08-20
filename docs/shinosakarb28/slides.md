@@ -66,7 +66,7 @@ ReactDOM.render(
 
 ## Environment Requirements
 - [requestIdleCallback](https://developer.mozilla.org/ja/docs/Web/API/Window/requestIdleCallback) に依存
-  - [対応ブラウザ](https://caniuse.com/#search=requestIdleCallback)が少ないので、[polyfill](https://github.com/facebook/react/blob/master/src/renderers/shared/ReactDOMFrameScheduling.js#L57-L83)を実装している
+  - [対応ブラウザ](https://caniuse.com/#search=requestIdleCallback)が少ないので、[polyfill](https://github.com/facebook/react/blob/master/src/renderers/shared/ReactDOMFrameScheduling.js#L57-L153)を実装している
 - [requestAnimationFrame](https://developer.mozilla.org/ja/docs/Web/API/Window/requestAnimationFrame) に依存
 
 ---
